@@ -1,36 +1,30 @@
-import { Component } from 'react';
+import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { GalleryItem, Image } from './ImageGalleryItem.styled';
 import PropTypes from 'prop-types';
-import Modal from 'components/Modal/Modal';
+import { Modal } from 'components/Modal/Modal';
 
-export default class ImageGalleryItem extends Component {
-  state = {
-    isModalOpen: false,
-  };
+export const ImageGalleryItem = ({ smallSize, tags, largeSize }) => {
+  const [selectedImage, setSelectedImage] = useState(null);
 
-  openModal = () => this.setState({ isModalOpen: true });
-  closeModal = () => this.setState(() => ({ isModalOpen: false }));
+  return (
+    <>
+      <GalleryItem onClick={imageUrl => setSelectedImage(imageUrl)}>
+        <Image src={smallSize} alt={tags} />
+      </GalleryItem>
 
-  render() {
-    const { smallSize, tags, largeSize } = this.props;
-    const { isModalOpen } = this.state;
-
-    return (
-      <>
-        <GalleryItem onClick={this.openModal}>
-          <Image src={smallSize} alt={tags} />
-        </GalleryItem>
-
-        {isModalOpen &&
-          createPortal(
-            <Modal src={largeSize} alt={tags} onClose={this.closeModal} />,
-            document.querySelector('#modal-root')
-          )}
-      </>
-    );
-  }
-}
+      {selectedImage &&
+        createPortal(
+          <Modal
+            src={largeSize}
+            alt={tags}
+            onModalClose={imageUrl => setSelectedImage(imageUrl)}
+          />,
+          document.querySelector('#modal-root')
+        )}
+    </>
+  );
+};
 
 ImageGalleryItem.propTypes = {
   tags: PropTypes.string.isRequired,

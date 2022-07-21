@@ -16,7 +16,7 @@ export const Notice = styled.div`
 
   color: ${props => {
     if (props.status === 'error') {
-      // return 'rgb(95, 33, 32)';
+      return 'rgb(95, 33, 32)';
     }
     if (props.status === 'warning') {
       return 'rgb(102, 60, 0)';
@@ -28,7 +28,7 @@ export const Notice = styled.div`
   }};
   background-color: ${props => {
     if (props.status === 'error') {
-      return 'rgb(95, 33, 32)';
+      return 'rgb(253, 237, 237)';
     }
     if (props.status === 'warning') {
       return 'rgb(255, 244, 229)';

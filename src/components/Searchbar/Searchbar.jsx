@@ -15,7 +15,7 @@ export const Searchbar = ({ onSubmit }) => {
       return;
     }
     onSubmit(values.query);
-    actions.resetForm();
+    // actions.resetForm();
   };
 
   return (
