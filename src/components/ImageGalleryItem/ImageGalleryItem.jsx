@@ -9,7 +9,7 @@ export const ImageGalleryItem = ({ smallSize, tags, largeSize }) => {
 
   return (
     <>
-      <GalleryItem onClick={imageUrl => setSelectedImage(imageUrl)}>
+      <GalleryItem onClick={link => setSelectedImage(link)}>
         <Image src={smallSize} alt={tags} />
       </GalleryItem>
 
@@ -18,7 +18,7 @@ export const ImageGalleryItem = ({ smallSize, tags, largeSize }) => {
           <Modal
             src={largeSize}
             alt={tags}
-            onModalClose={imageUrl => setSelectedImage(imageUrl)}
+            onModalClose={link => setSelectedImage(link)}
           />,
           document.querySelector('#modal-root')
         )}

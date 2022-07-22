@@ -30,5 +30,6 @@ export const Notification = ({ status, children }) => {
 };
 
 Notification.propTypes = {
+  status: PropTypes.string,
   children: PropTypes.node,
 };
