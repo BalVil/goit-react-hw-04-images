@@ -51,36 +51,34 @@ export const App = () => {
 
   const handleLoadMore = () => setPage(prev => prev + 1);
 
+  const showImageGallery = imageHits.length > 0;
+  const showLoadMore =
+    showImageGallery && imageHits.length < totalImages && !loading;
+  const showNoImages = totalImages === 0 && !loading;
+  const showEndSearch =
+    showImageGallery && imageHits.length === totalImages && !loading;
+
   return (
     <Wrapper>
       <Searchbar onSubmit={handleSearchSubmit} />
-
       {loading && <Loader />}
-
       {error && (
         <Notification status="error">
           Something went wrong. Try changing the query
         </Notification>
       )}
-
-      {totalImages === 0 && !loading && (
+      {showNoImages && (
         <Notification status="warning">
           Sorry, there are no images matching your search query. Please change
           the request
         </Notification>
       )}
-
-      {imageHits.length > 0 && (
-        <>
-          <ImageGallery images={imageHits} />
-          {imageHits.length < totalImages ? (
-            <Button onClick={handleLoadMore} />
-          ) : (
-            <Notification status="info">
-              We're sorry, but you've reached the end of search results
-            </Notification>
-          )}
-        </>
+      {showImageGallery && <ImageGallery images={imageHits} />}
+      {showLoadMore && <Button onClick={handleLoadMore} />}
+      {showEndSearch && (
+        <Notification status="info">
+          We're sorry, but you've reached the end of search results
+        </Notification>
       )}
     </Wrapper>
   );
