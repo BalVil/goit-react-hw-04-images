@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 
 export const Searchbar = ({ onSubmit }) => {
+  console.log(onSubmit);
   const handleSubmit = (values, actions) => {
     if (!values.query) {
       return;

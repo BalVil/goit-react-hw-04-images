@@ -4,6 +4,7 @@ import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import { Wrapper } from './App.styled';
 import * as API from 'services/api';
 import { Searchbar } from 'components/Searchbar/Searchbar';
+import { Greeting } from 'components/Greeting/Greeting';
 import { ImageGallery } from 'components/ImageGallery/ImageGallery';
 import { Loader } from 'components/Loader/Loader';
 import { Button } from 'components/Button/Button';
@@ -51,6 +52,7 @@ export const App = () => {
 
   const handleLoadMore = () => setPage(prev => prev + 1);
 
+  // computable data (обчислювані дані)
   const showImageGallery = imageHits.length > 0;
   const showLoadMore =
     showImageGallery && imageHits.length < totalImages && !loading;
@@ -61,6 +63,8 @@ export const App = () => {
   return (
     <Wrapper>
       <Searchbar onSubmit={handleSearchSubmit} />
+      {!loading && !error && <Greeting />}
+
       {loading && <Loader />}
       {error && (
         <Notification status="error">
